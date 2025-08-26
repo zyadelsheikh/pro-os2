@@ -1,10 +1,3 @@
-name: CI Test
-
-on:
-  push:
-    branches:
-      - master
-
 name: Build and Push Docker Image
 
 on:
@@ -36,9 +29,6 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ github.sha }}
-
+            
       - name: Verify deployment
         run: echo "Image successfully pushed to Docker Hub!"
-
-
-    
