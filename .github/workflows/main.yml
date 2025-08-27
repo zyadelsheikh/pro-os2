@@ -10,17 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "سحب الكود"
-        uses: actions/checkout@v3
-
-      - name: " تسجيل الدخول لـ Docker Hub"
-        uses: docker/login-action@v3
-        with:
-          username: zeyadelsheikh
-          password: dckr_pat_E6COZomTL3LJkh5_0zA5WfcrO3c
-
-      - name: "بناء صورة Docker"
-        run: docker build -t zeyadelsheikh/pr:latest .
-
-      - name: "رفع صورة Docker"
-        run: docker push zeyadelsheikh/pr:latest
+      
+       - uses: actions/checkout@v3
+       - name: "docker login"
+         run: docker login --username ${{ secrets.Docker_USERNAME}} --password ${{ secrets.Docker_TOCKEN}}
