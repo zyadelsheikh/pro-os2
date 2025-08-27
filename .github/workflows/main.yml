@@ -16,11 +16,11 @@ jobs:
       - name: " تسجيل الدخول لـ Docker Hub"
         uses: docker/login-action@v3
         with:
-          username: zeya10
+          username: zeyadelsheikh
           password: dckr_pat_E6COZomTL3LJkh5_0zA5WfcrO3c
 
       - name: "بناء صورة Docker"
-        run: docker build -t zeya10/myimage:latest .
+        run: docker build -t zeyadelsheikh/pr:latest .
 
       - name: "رفع صورة Docker"
-        run: docker push zeya10/myimage:latest
+        run: docker push zeyadelsheikh/pr:latest
