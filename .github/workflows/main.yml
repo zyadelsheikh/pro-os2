@@ -1,15 +1,26 @@
-name: build
+name: Build and Push Docker Image
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: سحب الكود
+        uses: actions/checkout@v3
 
-      - name: "Login to Docker hub"
-        run: docker login --username zeya10 --password dckr_pat_E6COZomTL3LJkh5_0zA5WfcrO3c
+      - name: تسجيل الدخول لـ Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: mizzzo997
+          password: dckr_pat_szluJm_plE51iDVP1CDjqoBm_kk
+
+      - name: بناء صورة Docker
+        run: docker build -t zeya10/pr:latest .
+
+      - name: رفع صورة Docker
+        run: docker push zeya10/pr:latest
