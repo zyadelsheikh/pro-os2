@@ -3,22 +3,13 @@ name: build
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Login to Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-      - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/myimage:latest .
-
-      - name: Push to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/myimage:latest
+      - name: "Login to Docker hub"
+        run: docker login --username zeya10 --password dckr_pat_E6COZomTL3LJkh5_0zA5WfcrO3c
