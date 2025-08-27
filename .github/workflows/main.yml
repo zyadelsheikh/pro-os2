@@ -1,7 +1,9 @@
-name: CI/CD
+name: build
 
 on:
   push:
+    branches: [ "master" ]
+  pull_request:
     branches: [ "master" ]
 
 jobs:
@@ -9,13 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: 'Login to Docker Hub'
-        run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_TOKEN }}
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: 'Building docker image'
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/myimage .
-
-      - name: 'Pushing to Docker Hub'
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/myimage
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/myimage:latest .
